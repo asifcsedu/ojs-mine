@@ -7,3 +7,40 @@ Commented out line 40,41,42 that is for the PKP/OSJ logo.
 From Journal Administration (logged in as admin) -> Administrative Functions -> Clear Template Cache
 Next Added some text and inline styling in line 39 and 40 (new)
 Output: PKP log GONE. (Success)
+
+Date: July 1, 2024
+3. Making a field mendatory (e.g. Orcid ID)
+a) In file lib/pkp/templates/common/userDetails.tpl in Line 110 after id="orcid" add required="true"
+b) In file lib/pkp/templates/controllers/grid/users/author/form in Line 61 make 'required' to 'optional'
+in the line $this->addCheck(new FormValidator($this, ‘orcid’, ‘required’, ‘user.orcid.orcidInvalid’));
+
+4. Install and Apply child theme for individual journals
+a) As Journal Admin, from left menu, Go to Website -> Plugins and install the Manuscript (Default child theme)
+[if not installed yet]
+b) From the Installed Plugins Enable Manuscript (Default child theme)
+c) Refresh the webpage
+d) from Appearance Tab -> Theme , select Manuscript (Default child theme)
+e) Save
+
+5. Justifying Abstract
+a) Have created a new .css file with the following content
+.pkp_site_name .is_img img {
+	max-height: 150x;
+}
+
+.obj_article_details .abstract, 
+.obj_article_details .item > :last-child {
+	text-align: justify;
+}
+b) Have saved the file and uploaded the css from Website -> Appearance -> Advanced -> Journal Stylesheet.
+
+6. To make the "Journal Summary" section appear on the top of homepage of individual journals
+a) Edit the file /var/www/html/ojs/templates/frontend/pages/indexJournal.tpl
+b) Add the following lines after the line {call_hook name="Templates::Index::journal"}
+	{if $currentContext}
+			<div class="about_journal">
+			<h1>{$currentContext->getLocalizedName()}</h1>
+			{$journalDescription|strip_unsafe_html}
+			</div>
+		{/if}
+c) Save and upload. We are done. 
