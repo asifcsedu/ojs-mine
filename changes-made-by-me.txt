@@ -44,3 +44,35 @@ b) Add the following lines after the line {call_hook name="Templates::Index::jou
 			</div>
 		{/if}
 c) Save and upload. We are done. 
+
+7. To make the number of times a paper has been viewed and downloaded.
+a) For OJS version 3.3.0.17 add the following function in the file /var/www/html/ojs/classes/submission/Submission.inc.php
+	(At the end) (Source: https://forum.pkp.sfu.ca/t/how-to-display-article-views-and-pdf-download-counts-on-journal-website/88697/5)
+	public function getDownloads()
+    {
+        $filters = [
+            'dateStart' => StatisticsHelper::STATISTICS_EARLIEST_DATE,
+            'dateEnd' => date('Y-m-d', strtotime('yesterday')),
+            'contextIds' => [$this->getData('contextId')],
+            'submissionIds' => [$this->getId()],
+            'assocTypes' => [Application::ASSOC_TYPE_SUBMISSION_FILE],
+        ];
+        $metrics = Services::get('publicationStats')
+            ->getQueryBuilder($filters)
+            ->getSum([])
+            ->value('metric');
+        return $metrics ? $metrics : 0;
+    }
+b) Included the following line in file /var/www/html/ojs/templates/frontend/objects/galley_link.tpl (for including download counter)
+	(At the end of the file, before the final </a> tag)
+	{assign var=galleys value=$article->getGalleys()}
+		{if $galleys}
+			{foreach from=$galleys item=galley name=galleyList} 
+				<sup><i class="fa fa-download"> </i> {$galley->getViews()} </sup>
+			{/foreach} 
+		{/if}
+c) Included the following line in file /var/www/html/ojs/templates/frontend/objects/article_summary.tpl (for including download counter)
+	(Around line 80. after the lines {if !$hideGalleys} <ul class="galleys_links">)
+	<li><span class="cmp_button_wire"><i class="fa fa-eye"></i> 
+			{$article->getViews()}
+			</span<</li>
