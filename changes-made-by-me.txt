@@ -6,7 +6,9 @@ Outcome: Footer of homepage did not change.
 Commented out line 40,41,42 that is for the PKP/OSJ logo. 
 From Journal Administration (logged in as admin) -> Administrative Functions -> Clear Template Cache
 Next Added some text and inline styling in line 39 and 40 (new)
-Output: PKP log GONE. (Success)
+Output: PKP logo GONE. (Success)
+b) Next copied code from DU website's footer with all the css classes and pasted it in the footer.tlp file.
+c) Magic!! Footer changed completely.
 
 Date: July 1, 2024
 3. Making a field mendatory (e.g. Orcid ID)
@@ -24,9 +26,6 @@ e) Save
 
 5. Justifying Abstract
 a) Have created a new .css file with the following content
-.pkp_site_name .is_img img {
-	max-height: 150x;
-}
 
 .obj_article_details .abstract, 
 .obj_article_details .item > :last-child {
@@ -76,3 +75,38 @@ c) Included the following line in file /var/www/html/ojs/templates/frontend/obje
 	<li><span class="cmp_button_wire"><i class="fa fa-eye"></i> 
 			{$article->getViews()}
 			</span<</li>
+
+8. Adding Social Media Icons
+a) Install the plugin Sharrif.
+b) In Website->Appearance you will find a new Menu called "Shariff Plugin". Select the icons you want to display
+and also the location where to display (footer, sidebar, publication page), how to display (vertical, horizontal) etc.
+If you choose sidebar, then from Website -> Appearance -> Setup check "Sharrif Block Plugin" from Sidebar menu. 
+c) Save. You are done.
+*In my case, the icons were coming but the text and logs of the social media were not coming. It was a 
+conflict with one of the css I used for the footer of our site. I changed the css and everything worked fine.
+
+9. Assigning DOI to papers and issues
+a) In Settings -> Journal -> Masthead, fill up the "Publication Details"
+b) In the 'CrossRef XML Export Plugin', I used Depositor Name 'AFJ Manager' and email 'afj-manager@du.ac.bd'
+c) In the 'CrossRef XML Export Plugin', I have given the username and password of my crossref account
+d) In the 'CrossRef XML Export Plugin', checked 'OJS will deposit assigned DOI ....' and Saved.
+e) Installed the DOI pluging
+f) In the settings of DOI plugin, checked 'Article', Provided DOI Prefix (obtained from crossref).
+g)  In the settings of DOI plugin, chose the first Radio as DOI Prefix
+h) In the settings of DOI plugin, Clicked "Assign DOIs" at the bottom.
+i) Saved. It worked!!
+
+10. Repare the Register and Login pages
+a) Due to our footer css, the registration and login page field labels became invisible.
+b) Added a css as 'site style css' to repair this damage.
+c) Crated a new file called journal-site.css with the following content:
+.cmp_form .label {
+    display: block;
+    font-size: 100 px;
+    font-weight: 400;
+    font-style: italic;
+    color: black;
+    text-align: left;
+}
+d) Uploaded it to Adminstration -> Site Settings -> Appearance -> Setup -> 'Site Style Sheet'
+e) Done !!
