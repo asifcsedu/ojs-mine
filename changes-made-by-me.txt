@@ -110,3 +110,11 @@ c) Crated a new file called journal-site.css with the following content:
 }
 d) Uploaded it to Adminstration -> Site Settings -> Appearance -> Setup -> 'Site Style Sheet'
 e) Done !!
+
+11. Adding Custom blocks (e.g. Blocks with downloadable files on sidebar)
+a) Install plugin 'Custom Block Manager'
+b) Then from plugin settings called 'Custom Block Manager', click 'Add Block'
+c) Give name of the block and put contents that needs to be in the block. It is possible to add hyperlinks
+that can be used for adding downloadables.
+d) From Website -> Appearance -> Setup -> Sidebar make sure to make the custom block checked.
+e) Done.
