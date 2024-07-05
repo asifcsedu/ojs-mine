@@ -118,3 +118,16 @@ c) Give name of the block and put contents that needs to be in the block. It is 
 that can be used for adding downloadables.
 d) From Website -> Appearance -> Setup -> Sidebar make sure to make the custom block checked.
 e) Done.
+
+12. Adding Site-wide Search cmp_button
+a) Open file /var/www/html/ojs/templates/frontend/pages/indexSite.tpl
+b) Added the lines after <div class="page_index_site"> [Line 14]
+	<div>
+		<a href="https://journals.du.ac.bd/index.php/index/search" class="pkp_search pkp_search_desktop">
+			<span class="fa fa-search" aria-hidden="true"></span>
+			Search the Site
+		</a>
+	</div>
+c) Search button appeared immediately below Page Banner.
+d) Not fully satistifed, as I wanted to put it in the page banner.
+e) But Happy with the result!!
