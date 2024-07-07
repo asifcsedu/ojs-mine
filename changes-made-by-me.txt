@@ -132,3 +132,7 @@ b) Added the lines after <div class="page_index_site"> [Line 14]
 c) Search button appeared immediately below Page Banner.
 d) Not fully satistifed, as I wanted to put it in the page banner.
 e) But Happy with the result!!
+
+13. Enforcing email varification
+a) In line 394 of config.inc.php set require_validation from Off to On.
+d) Done.
