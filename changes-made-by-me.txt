@@ -136,3 +136,26 @@ e) But Happy with the result!!
 13. Enforcing email varification
 a) In line 394 of config.inc.php set require_validation from Off to On.
 d) Done.
+
+14. Adding 'phone' field in the registration form and making it mendatory field
+a) edit the file /var/www/html/ojs/lib/pkp/classes/user/form/RegistrationForm.inc.php. 
+   i) modify the function readInputData() and add a new key 'phone' for the associative array $this->readUserVars(array(
+	after 'reviewerGroup'.
+	ii) Add the following line in the section "Set the base user fields (name, etc.)"
+	$user->setPhone($this->getData(‘phone’));
+b) edit the file lib/pkp/templates/frontend/components/registrationForm.tpl
+	i) Say, we will add it before the 'Country' field. So, we shall add the following lines before “<div class=”country”>”  lines.
+	ii) 
+		<div class=”form-group phone”>
+			<label>
+			<span class=”label”>
+				{translate key=”user.phone”}
+				<span class=”form-control-required”>*</span>
+				<span class=”sr-only”>{translate key=”common.required”}</span>
+			</span>
+				<input class=”form-control” type=”text” name=”phone” id=”phone” value=”{$phone|escape}” required>
+			</label>
+		</div>
+	c) Done. However, what I could not do is force the users who are already registered to input their 
+	phone numbers after next login. 
+	
