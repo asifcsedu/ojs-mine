@@ -159,3 +159,23 @@ b) edit the file lib/pkp/templates/frontend/components/registrationForm.tpl
 	c) Done. However, what I could not do is force the users who are already registered to input their 
 	phone numbers after next login. 
 	
+15. Changin the appearnace of the login or Register page
+a) Edit the file openIdLogin.tpl in folder /var/www/html/ojs/plugins/generic/openid/templates/
+(make sure you have permission to edit. We had to change the permission)
+b) Due to installation of OpenID plugin, there was an error message in Site's homepage.
+To supress that we commented, the {if $openidError} block (line 37 to 50 in my file)
+c) To show new message in both Site's homepage's login/register page and individual journals's same login/register page
+added the following code
+	{if $openidError}
+		<div class="openid-info">
+			<h2 style="margin: 0">To Sign in or Register please visit respective Journal's homepage ...</h2>
+		</div>
+	{else}
+		<div class="openid-info">
+			<h3 style="margin: 0">To Register, please click the 'Sign in with Google' button below.<br>You need to have a Gmail or DU's institutional email account.</h3>
+		</div>
+	{/if}
+
+d) To change the logo, changed the logo image source in line 74.
+e) Done !!
+
